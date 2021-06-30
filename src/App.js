@@ -1,6 +1,7 @@
 import './App.css';
 import Header from "./components/Header";
-import Profile from "./pages/Profile"
+import Profile from "./pages/ProfilePage/Profile"
+import Board from "./pages/BoardPage/BoardPage"
 import Login from "./pages/Login"
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -16,6 +17,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/board">
+            <Board />
           </Route>
           <Route path="/">
             <div>root</div>

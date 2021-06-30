@@ -1,4 +1,4 @@
-import cardDefaultImg from "./../static/card-bg.png"
+import cardDefaultImg from "./../../static/card-bg.png"
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Card() {
