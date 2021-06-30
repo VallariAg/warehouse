@@ -6,7 +6,7 @@ import Card from "./BoardCard"
 
 
 export default function ProfilePage() {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated, isLoading, context } = useAuth0();
   let isSelfProfile = false;
   if (isLoading) {
     return <div>Loading...</div>
@@ -14,7 +14,7 @@ export default function ProfilePage() {
 
   if (user) { isSelfProfile = true }
 
-  console.log(user, isAuthenticated);
+  console.log(user, isAuthenticated, context);
   // console.log(user.username, user.user_id);
 
   return (
