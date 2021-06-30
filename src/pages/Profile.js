@@ -1,4 +1,5 @@
 import cardDefaultImg from "./../static/card-bg.png"
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Card() {
     return (
@@ -27,10 +28,19 @@ function ProfileHeader() {
   )
 }
 
-export default function App() {
+export default function ProfilePage() {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  console.log(user);
+  console.log(user.username, user.user_id);
+
   return (
       <div className="relative items-center justify-center lg:px-14 md:px-3 sm:px-1">
-          <ProfileHeader />
+          <ProfileHeader username={user} />
           <div class=" grid lg:grid-cols-4 md:grid-cols-3 gap-2">
             <Card />
             <Card />

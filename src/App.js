@@ -1,15 +1,29 @@
 import './App.css';
 import Header from "./components/Header";
 import Profile from "./pages/Profile"
+import Login from "./pages/Login"
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    // <div>
-       <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <BrowserRouter>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <Header />
 
-      <Header />
-      <Profile />
-    </div>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/">
+            <div>root</div>
+          </Route>
+        </Switch>
+        
+      </div>
+    </BrowserRouter>
   );
 }
 
