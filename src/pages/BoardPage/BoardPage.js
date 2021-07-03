@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { PlusCircleIcon, PencilIcon } from "@heroicons/react/outline";
 import Card from "./PostCard";
-import EditBoardModal from "./EditBoardPopUp"
+import EditBoardModal from "./EditBoardPopUp";
+import AddPostModal from "./AddPostPopUp";
+
 
 export default function BoardPage() {
   const [isEditBoardModalOpen, setisEditBoardModalOpen] = useState(false)
+  const [isAddPostModalOpen, setisAddPostModalOpen] = useState(false)
 
   return (
       <div className="">
@@ -14,11 +17,14 @@ export default function BoardPage() {
                 <PencilIcon className="ml-2 h-5 w-5 text-gray-500 hover:text-gray-800" /> 
             </button>
             { isEditBoardModalOpen ? 
-            <EditBoardModal isModalOpen={isEditBoardModalOpen} setIsModalOpen={setisEditBoardModalOpen} />
+                <EditBoardModal isModalOpen={isEditBoardModalOpen} setIsModalOpen={setisEditBoardModalOpen} />
             : "" }
-            <button className="right-0 float-right">
+            <button onClick={() => setisAddPostModalOpen(!isAddPostModalOpen)} className="right-0 float-right">
                 <PlusCircleIcon className="ml-2 h-9 w-9 text-gray-500 hover:text-gray-800" />
             </button>
+            { isAddPostModalOpen ?
+                <AddPostModal isModalOpen={isAddPostModalOpen} setIsModalOpen={setisAddPostModalOpen} />
+            : ""}
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 my-2">
             <Card />

@@ -2,6 +2,7 @@ import './App.css';
 import Header from "./components/Header";
 import Profile from "./pages/ProfilePage/Profile"
 import Board from "./pages/BoardPage/BoardPage"
+import RedirectToProfile from "./pages/ProfilePage/RedirectToProfile"
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -12,10 +13,13 @@ function App() {
 
         <Switch>
           <Route path="/profile">
-            <Profile />
+            <RedirectToProfile />
           </Route>
           <Route path="/board">
             <Board />
+          </Route>
+          <Route path="/:username">
+            <Profile />
           </Route>
           <Route path="/">
             <div>root</div>

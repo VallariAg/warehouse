@@ -52,7 +52,7 @@ function Form({ isEditMode }) {
         </form>
         { isEditMode ? <>
             <div className="mt-3 grid grid-cols-2">
-                <button className="bg-indigo-500 text-white mx-1 rounded w-min py-1 justify-self-start px-3">Save</button>
+                <button className="bg-indigo-500 text-white rounded w-min py-1 justify-self-start px-3">Save</button>
                 <button className="w-6 h-6 rounded w-min py-1 justify-self-end px-3">
                     <TrashIcon className="ml-2 h-5 w-5 left-0 text-red-500 hover:text-red-700" />
                 </button>
