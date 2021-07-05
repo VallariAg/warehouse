@@ -32,14 +32,16 @@ export default function Boards({boardsData, isSelfProfile}) {
 
     return(
     <div className="flex flex-col w-full">
-        <div>
-            <button onClick={() => setIsModalOpen(!isModalOpen)}  className="mx-1 mb-1 float-right w-min align-self-end">
-                <ViewGridAddIcon className="ml-1 h-7 w-7 text-gray-500 hover:text-gray-800" />
-            </button>
-            <button className="mx-1 mb-1 float-right w-min align-self-end">
-                <PlusCircleIcon className="ml-1 h-7 w-7 text-gray-500 hover:text-gray-800" />
-            </button>
-        </div>
+        { isSelfProfile ? 
+            <div>
+                <button onClick={() => setIsModalOpen(!isModalOpen)}  className="mx-1 mb-1 float-right w-min align-self-end">
+                    <ViewGridAddIcon className="ml-1 h-7 w-7 text-gray-500 hover:text-gray-800" />
+                </button>
+                <button className="mx-1 mb-1 float-right w-min align-self-end">
+                    <PlusCircleIcon className="ml-1 h-7 w-7 text-gray-500 hover:text-gray-800" />
+                </button>
+            </div> 
+        : ""}
         { isModalOpen ? <CreateBoardModal 
                             setIsModalOpen={setIsModalOpen} 
                             boards={boards}

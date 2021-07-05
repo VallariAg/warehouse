@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 // components
 import ProfileHeader from "./ProfileHeader";
 import Boards from "./Boards";
+import Loading from "./../../components/Loading";
 // custom hooks
 import useGetBoards from "../../hooks/Board/useGetBoard";
 
@@ -18,7 +19,7 @@ export default function ProfilePage() {
   let isSelfProfile = false;
   const { user, isLoading } = useAuth0();
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <Loading />
 
   if (user) { // a user is logged in
     user["username"] = user['https://myapp.example.com/username'];
@@ -32,7 +33,7 @@ export default function ProfilePage() {
      return <div className="text-200 text-gray-600 my-24 text-center">No such user exists</div>
   }
 
-  if (userData.loading ===  true) return <div>loading...</div>
+  if (userData.loading ===  true) return <Loading />
 
   return (
       <div className="relative items-center justify-center lg:px-14 md:px-3 sm:px-1">
