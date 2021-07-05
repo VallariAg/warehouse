@@ -17,13 +17,16 @@ function SelfUserEditComponents({user}) {
     )
 }
 
-export default function ProfileHeader({user, isSelfProfile, username}) {
+export default function ProfileHeader({user, isSelfProfile, loggenInData}) {
+  if (!user) return ""
+  console.log("user:", user)
+  const username = user.username;
     return(
       <div className="grid justify-center my-5">
         <div class="rounded-full text-gray-600 text-5xl justify-self-center my-2 h-32 w-32 flex items-center justify-center bg-blue-50">{username[0].toUpperCase()}</div>
         <h1 className="text-xl text-gray-600 justify-self-center">@{username}</h1>
         {/* <h3 className="text-gray-700 text-md justify-self-center">@{username}</h3> */}
-        { isSelfProfile ? <SelfUserEditComponents user={user} /> : "" }  
+        { isSelfProfile ? <SelfUserEditComponents user={loggenInData} /> : "" }  
       </div>
     )
   }

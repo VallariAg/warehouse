@@ -7,7 +7,11 @@ export default function RedirectToProfile() {
         return "is loading...";
     }
 
+    if (!user) {
+        document.location = process.env.REACT_APP_URI
+    }
     const username = user['https://myapp.example.com/username'];
     document.location = process.env.REACT_APP_URI + username;
+    
     return ("")
 }

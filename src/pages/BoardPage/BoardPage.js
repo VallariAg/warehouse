@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { PlusCircleIcon, PencilIcon } from "@heroicons/react/outline";
-import Card from "./PostCard";
-import EditBoardModal from "./EditBoardPopUp";
-import AddPostModal from "./AddPostPopUp";
+import Card from "./LinkCard";
+import EditBoardModal from "./EditBoard_Modal";
+import AddPostModal from "./AddLink_Modal";
 
 
 export default function BoardPage() {
@@ -27,9 +27,9 @@ export default function BoardPage() {
             : ""}
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 my-2">
-            <Card />
-            <Card />
-            <Card />
+            {/* <Card /> */}
+            {/* <Card /> */}
+            {/* <Card /> */}
             <Card />
             <Card />
         </div>

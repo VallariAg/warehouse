@@ -4,14 +4,27 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_HASURA_SERVER_URI,
+  headers: {
+    'x-hasura-admin-secret': process.env.REACT_APP_HASURA_SECRET
+  },
+  cache: new InMemoryCache(),
+})
+
+console.log(process.env.REACT_APP_HASURA_SECRET, process.env.REACT_APP_0AUTH_DOMAIN)
 
 ReactDOM.render(
+  <ApolloProvider client={client}>
   <Auth0Provider
     domain={process.env.REACT_APP_0AUTH_DOMAIN}
     clientId={process.env.REACT_APP_0AUTH_CLIENTID}
     redirectUri={process.env.REACT_APP_LOGIN_REDIRECT_URI}>
-    <App />
-  </Auth0Provider>,
+               <App />
+  </Auth0Provider>
+  </ApolloProvider>,
   document.getElementById('root')
 );
 

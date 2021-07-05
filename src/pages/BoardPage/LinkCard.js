@@ -1,7 +1,7 @@
 import { useState } from "react"
 import {LinkIcon, ExternalLinkIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
-import Modal from "./PostPopUp";
+import Modal from "./CardView&Edit_Modal";
 
 
 export default function PostCard() {

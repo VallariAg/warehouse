@@ -19,7 +19,11 @@ function LoginOrUser({user}) {
 }
 export default function Header() {
   const { user } = useAuth0();
-
+  let username = ""
+  
+  if (user) {
+    username = user['https://myapp.example.com/username'];
+  }
 
 
   return (
@@ -28,7 +32,7 @@ export default function Header() {
           <Link href="/" className="px-2 text-base font-medium text-gray-500 hover:text-gray-900">
             Logo
           </Link>
-          <Link to="/profile" className="px-2 text-base font-medium text-gray-500 hover:text-gray-900">
+          <Link to={"/" + username} className="px-2 text-base font-medium text-gray-500 hover:text-gray-900">
               Home
           </Link>
           
