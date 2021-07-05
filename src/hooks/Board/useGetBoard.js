@@ -9,7 +9,7 @@ export default function useGetBoards(username) {
     // no such user exist
     if (data.users.length === 0) return null;
  
-    const userData = { username: data.users[0].username, boards: data.users[0].boards};
+    const userData = { username: data.users[0].username, boards: data.users[0].boards };
     if (!userData.boards) userData.boards = [];
     return userData;
 } 
@@ -24,6 +24,11 @@ query MyQuery($username: String) {
       board_img
       board_id
       board_name
+      link_data_aggregate {
+        aggregate {
+          count(columns: link)
+        }
+      }
     }
   }
 }
