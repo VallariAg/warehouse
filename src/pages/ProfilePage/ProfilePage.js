@@ -9,7 +9,6 @@ import Loading from "./../../components/Loading";
 import useGetBoards from "../../hooks/Board/useGetBoard";
 
 
-
 export default function ProfilePage() {
 
   let { username } = useParams();
@@ -38,7 +37,7 @@ export default function ProfilePage() {
   return (
       <div className="relative items-center justify-center lg:px-14 md:px-3 sm:px-1">
           <ProfileHeader user={userData} isSelfProfile={isSelfProfile} loggenInData={user} />
-          <Boards boardsData={userData.boards} isSelfProfile={isSelfProfile} />
+          <Boards boardsData={userData.boards} username={userData.username} isSelfProfile={isSelfProfile} />
   </div>
   );
 }

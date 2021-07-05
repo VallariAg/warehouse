@@ -1,8 +1,10 @@
-import { useState } from 'react'
-// import { Dialog, Transition } from '@headlessui/react'
-import {  XIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline'
+import { useState } from 'react';
+import {  XIcon } from '@heroicons/react/outline';
+import { useParams } from "react-router-dom";
+import useCreateBoard from '../../hooks/Board/useCreateBoard';
 
-export default function CreateBoardModal({ setIsModalOpen, boards, setBoards }) {
+
+export default function CreateBoardModal({ setIsModalOpen, boards, setBoards, username }) {
 
     return (
             <div className="fixed text-sm text-gray-500  flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
@@ -15,37 +17,58 @@ export default function CreateBoardModal({ setIsModalOpen, boards, setBoards }) 
                         </button>
                     </div>                    
                     
-                    <Form boards={boards} setBoards={setBoards} setIsModalOpen={setIsModalOpen} />
+                    <Form boards={boards} username={username} 
+                          setBoards={setBoards} setIsModalOpen={setIsModalOpen} />
                 
                 </div>
             </div>
     )
 }
 
-function Form({boards, setBoards, setIsModalOpen}) {
-    
+function Form({boards, setBoards, setIsModalOpen, username}) {
+    console.log(process.env.REACT_APP_BOARD_DEFAULT_IMG)
+    const [boardName, setboardName] = useState("")
+    const [boardImg, setboardImg] = useState("")
+    const { addBoard, addBoardWithImg } = useCreateBoard();
+    const defaultImg = process.env.REACT_APP_BOARD_DEFAULT_IMG;
+
     const submitForm = () => {
-        setBoards(["cars", "c", "a", "ab"]);
+        const newBoard = {  
+            username,
+            board_name: boardName,
+            board_img: boardImg || defaultImg,
+            link_data_aggregate: { aggregate: { count: 0 } } 
+        };
+
+        if (!boardImg || boardImg === "") {
+            addBoard({variables: {username, board_name: boardName}})
+        } 
+        else {
+            addBoardWithImg({ variables: {username, board_name: boardName, board_img: boardImg} })
+        } 
+
+        setBoards(boards.concat(newBoard));
         setIsModalOpen(false);
     }
 
     return (
     <>
         <form className="flex flex-col">
-            <span className="text-center text-lg">Add Link</span>
+            <span className="text-center text-lg">Create a board</span>
+            <div className="flex justify-center">
+                <img className="w-48 rounded-md" src={boardImg || defaultImg}></img>
+            </div>
             <input 
                 className="shadow-gray-100 shadow-mg bg-gray-50 text-gray-800 p-2 mt-2 bg-white text-center focus:outline-none focus:ring-2 focus:ring-gray-100 focus:border-transparent rounded"
-                placeholder="Title"
-            />
-            <textarea 
-                className="shadow-gray-100 shadow-mg bg-gray-50 text-gray-800 p-2 mt-1 bg-white focus:outline-none focus:ring-2 focus:ring-gray-100 focus:border-transparent rounded"
-                placeholder="Description"
-                // value="Top 10 Cars rated" 
+                placeholder="Board Name"
+                value={boardName}
+                onChange={(e) => setboardName(e.target.value)}
             />
             <input  
                 className="shadow-gray-100 shadow-mg bg-gray-50 text-gray-800 p-2 mt-1 mb-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-100 focus:border-transparent rounded"
-                placeholder="https://example.com"
-                // value="https://cars.com" 
+                placeholder="Board image URL"
+                value={boardImg}
+                onChange={(e) => setboardImg(e.target.value)}
             />
            
         </form>

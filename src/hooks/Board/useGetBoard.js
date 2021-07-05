@@ -9,9 +9,7 @@ export default function useGetBoards(username) {
     // no such user exist
     if (data.users.length === 0) return null;
  
-    const userData = { username: data.users[0].username, boards: data.users[0].boards };
-    if (!userData.boards) userData.boards = [];
-    return userData;
+    return data.users[0];
 } 
 
 

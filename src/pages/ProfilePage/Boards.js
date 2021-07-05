@@ -4,7 +4,7 @@ import CreateBoardModal from "./CreateBoard_Modal";
 import { PlusCircleIcon, ViewGridIcon, ViewGridAddIcon } from "@heroicons/react/outline";
 
 
-export default function Boards({boardsData, isSelfProfile}) {
+export default function Boards({boardsData, username, isSelfProfile}) {
     const [boards, setBoards] = useState(boardsData)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -24,7 +24,8 @@ export default function Boards({boardsData, isSelfProfile}) {
                 { isModalOpen ? <CreateBoardModal 
                                     setIsModalOpen={setIsModalOpen} 
                                     boards={boards}
-                                    setBoards={setBoards} />
+                                    setBoards={setBoards}
+                                    username={username} />
                               : ""}  
             </div>  : ""}
         </div>); 
@@ -45,7 +46,8 @@ export default function Boards({boardsData, isSelfProfile}) {
         { isModalOpen ? <CreateBoardModal 
                             setIsModalOpen={setIsModalOpen} 
                             boards={boards}
-                            setBoards={setBoards} />
+                            setBoards={setBoards}
+                            username={username} />
                       : ""}  
         <div class=" grid lg:grid-cols-4 md:grid-cols-3 gap-2">
           {

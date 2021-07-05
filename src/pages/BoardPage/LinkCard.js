@@ -1,5 +1,5 @@
 import { useState } from "react"
-import {LinkIcon, ExternalLinkIcon } from "@heroicons/react/outline";
+import {LinkIcon, ExternalLinkIcon, DocumentDuplicateIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import Modal from "./CardView&Edit_Modal";
 
@@ -19,7 +19,7 @@ export default function PostCard() {
               <span className="grid grid-cols-4 lg:grid-cols-5 text-lg w-full leading-tight text-gray-700"> 
                     <span className="lg:col-span-4 col-span-3">Some long  long Title</span>
                     <button className="right-0 grid col-gap-2 grid-cols-2 float-right">
-                        <LinkIcon className="ml-2 h-5 w-5 mx-2 text-gray-500 hover:text-gray-600" /> 
+                        <DocumentDuplicateIcon className="ml-2 h-5 w-5 mx-2 text-gray-500 hover:text-gray-600" /> 
                         <ExternalLinkIcon className="ml-2 h-5 w-5 mx-2 text-gray-500 hover:text-gray-600" /> 
                     </button>
               </span>
