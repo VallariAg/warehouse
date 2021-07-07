@@ -18,7 +18,7 @@ function App() {
           <Route path="/profile">
             <RedirectToProfile />
           </Route>
-          <Route path="/board">
+          <Route path="/:username/:boardname">
             <Board />
           </Route>
           <Route path="/:username">

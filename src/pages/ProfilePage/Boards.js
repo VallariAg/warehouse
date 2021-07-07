@@ -8,6 +8,12 @@ export default function Boards({boardsData, username, isSelfProfile}) {
     const [boards, setBoards] = useState(boardsData)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
+
+    const AddBoardModal = (<CreateBoardModal 
+                                setIsModalOpen={setIsModalOpen} 
+                                boards={boards}
+                                setBoards={setBoards}
+                                username={username} />)
     if (boards.length === 0) {
       return (
       <div className="flex flex-col text-center my-20 justify-items-center content-center">
@@ -21,12 +27,7 @@ export default function Boards({boardsData, username, isSelfProfile}) {
                     className="bg-indigo-50 text-black rounded w-32 py-1 justify-self-center px-3">
                         Add a board
                 </button> 
-                { isModalOpen ? <CreateBoardModal 
-                                    setIsModalOpen={setIsModalOpen} 
-                                    boards={boards}
-                                    setBoards={setBoards}
-                                    username={username} />
-                              : ""}  
+                { isModalOpen ? AddBoardModal : ""}  
             </div>  : ""}
         </div>); 
     }
@@ -43,16 +44,11 @@ export default function Boards({boardsData, username, isSelfProfile}) {
                 </button>
             </div> 
         : ""}
-        { isModalOpen ? <CreateBoardModal 
-                            setIsModalOpen={setIsModalOpen} 
-                            boards={boards}
-                            setBoards={setBoards}
-                            username={username} />
-                      : ""}  
+        { isModalOpen ? AddBoardModal : ""}  
         <div class=" grid lg:grid-cols-4 md:grid-cols-3 gap-2">
           {
             boards.map((board) => {
-              return <Card board={board} />
+              return <Card board={board} username={username} />
             })
           }
         </div>

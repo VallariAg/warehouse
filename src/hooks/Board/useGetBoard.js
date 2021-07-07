@@ -4,7 +4,7 @@ export default function useGetBoards(username) {
     const { data, loading, error } = useQuery(GETUSERBOARDS, { variables: { username: username } });
     
     if (loading) return { loading: true };
-    if (error) return {"error": error};
+    if (error) return { error };
 
     // no such user exist
     if (data.users.length === 0) return null;

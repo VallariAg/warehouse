@@ -1,40 +1,44 @@
-import { useState } from "react";
-import { PlusCircleIcon, PencilIcon } from "@heroicons/react/outline";
-import Card from "./LinkCard";
-import EditBoardModal from "./EditBoard_Modal";
-import AddPostModal from "./AddLink_Modal";
+import { useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+// components
+import Loading from "./../../components/Loading";
+import Error from "./../../components/Error";
+// custom hooks
+import useGetLinks from "../../hooks/Links/useGetLink";
+import Links from "./Links";
+
 
 
 export default function BoardPage() {
-  const [isEditBoardModalOpen, setisEditBoardModalOpen] = useState(false)
-  const [isAddPostModalOpen, setisAddPostModalOpen] = useState(false)
+
+  let { username, boardname } = useParams();
+  const boardData = useGetLinks(username, boardname);
+
+  // check if current profile is user's own profile 
+  let isSelfProfile = false;
+  const { user, isLoading } = useAuth0();
+
+  if (isLoading) return <Loading />
+
+  if (user) { // a user is logged in
+    user["username"] = user['https://myapp.example.com/username'];
+    if (user.username === username){
+      isSelfProfile = true;
+    }
+  }
+
+  // no user in database
+  if (!boardData) { 
+     return <div className="text-200 text-gray-600 my-24 text-center">No such board exists</div>
+  }
+
+  if (boardData.loading ===  true) return <Loading />
+  if (boardData.error) return <Error error={boardData.error} />
 
   return (
-      <div className="">
-        <h1 className="text-4xl text-gray-700 my-5 mx-3 lg:my-8 md:my-5 sm:my-5">
-            Board Title
-            <button onClick={() => setisEditBoardModalOpen(!isEditBoardModalOpen)} className="mx-3">
-                <PencilIcon className="ml-2 h-5 w-5 text-gray-500 hover:text-gray-800" /> 
-            </button>
-            { isEditBoardModalOpen ? 
-                <EditBoardModal isModalOpen={isEditBoardModalOpen} setIsModalOpen={setisEditBoardModalOpen} />
-            : "" }
-            <button onClick={() => setisAddPostModalOpen(!isAddPostModalOpen)} className="right-0 float-right">
-                <PlusCircleIcon className="ml-2 h-9 w-9 text-gray-500 hover:text-gray-800" />
-            </button>
-            { isAddPostModalOpen ?
-                <AddPostModal isModalOpen={isAddPostModalOpen} setIsModalOpen={setisAddPostModalOpen} />
-            : ""}
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 my-2">
-            {/* <Card /> */}
-            {/* <Card /> */}
-            {/* <Card /> */}
-            <Card />
-            <Card />
-        </div>
-      </div>
-    )
+      <Links isSelfProfile={isSelfProfile} boardData={boardData} />
+  );
 }
+
 
 

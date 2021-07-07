@@ -14,7 +14,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
-console.log(process.env.REACT_APP_HASURA_SECRET, process.env.REACT_APP_0AUTH_DOMAIN)
 
 ReactDOM.render(
   <ApolloProvider client={client}>
