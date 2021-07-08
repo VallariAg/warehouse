@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Modal from "./CardView&Edit_Modal";
 
 
-export default function LinkCard({ data, boardID }) {
+export default function LinkCard({ data }) {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [linkData, setLinkData] = useState(data)
     const description = linkData.description;

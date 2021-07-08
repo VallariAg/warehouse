@@ -36,7 +36,7 @@ function Form({ isEditMode, linkData, setLinkData, setIsModalOpen }) {
     const [link, setLink] = useState(linkData.link);
     const [title, setTitle] = useState(linkData.title);
     const [description, setDescription] = useState(linkData.description);
-    const updateLink = useUpdateLink()
+    const { updateLink, mutationError, mutationLoading } = useUpdateLink()
 
     const onSubmit = () => {
         const updatedLinkData = {
@@ -45,9 +45,10 @@ function Form({ isEditMode, linkData, setLinkData, setIsModalOpen }) {
             description,
             id: linkData.id
         }
-        updateLink({variables: { id: linkData.id, title, description, link} });
-        setLinkData(updatedLinkData);
-        setIsModalOpen(false);
+        updateLink({variables: { id: linkData.id, title, description, link} }).then(() => {
+            setLinkData(updatedLinkData);
+            setIsModalOpen(false);
+        });
     }
     return (
     <>
@@ -72,6 +73,8 @@ function Form({ isEditMode, linkData, setLinkData, setIsModalOpen }) {
             />
            
         </form>
+        {mutationError ? <p className="text-red-700 text-center">Error! Please try again</p> : ""}
+        {mutationLoading ? <p className="text-green-700 text-center">Saving...</p> : ""}
         { isEditMode ? <>
             <div className="mt-3 grid grid-cols-2">
                 <button className="bg-indigo-500 text-white rounded w-min py-1 justify-self-start px-3"

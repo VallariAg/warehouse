@@ -12,7 +12,7 @@ import Links from "./Links";
 export default function BoardPage() {
 
   let { username, boardname } = useParams();
-  const boardData = useGetLinks(username, boardname);
+  const boardData = useGetLinks(username, boardname.replace("-", " "));
 
   // check if current profile is user's own profile 
   let isSelfProfile = false;
@@ -29,11 +29,12 @@ export default function BoardPage() {
 
   // no user in database
   if (!boardData) { 
-     return <div className="text-200 text-gray-600 my-24 text-center">No such board exists</div>
-  }
+    return <div className="text-200 text-gray-600 my-24 text-center">No such board exists</div>
+}
 
   if (boardData.loading ===  true) return <Loading />
   if (boardData.error) return <Error error={boardData.error} />
+
 
   return (
       <Links isSelfProfile={isSelfProfile} boardData={boardData} />
